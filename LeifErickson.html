@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Question Game</title>
+</head>
+
+<body>
+    <div class="jumbotron">
+        <h1>Question Game</h1>
+        <h2>Play at own risk!</h2>
+        <hr class="my-2">
+
+    </div>
+    <p id="notification"></p>
+    <p id="score"></p>
+    <p id="question"></p>
+
+    <script>
+
+        var questions = [
+            { q: "11TH CENTURY IS WHEN LEIF ERICKSON FLOURISHED AND THEN DIED?", a: "t" },
+
+            { q: "IS IT THE 3RD CENTURY BC IN WHICH ALEXANDER THE GREAT RULED?", a: "f" },
+
+            { q: "EGYPT IS WHERE THE OLDEST HOMO SAPIEN BONES WERE FOUND?", a: "f" },
+
+            { q: "1999 WAS THE YEAR JAVASCRIPT WAS CREATED?", a: "f" },
+
+            { q: "JAMES POLK WAS THE 14TH PRESIDENT OF THE U.S?", a: "f" },
+
+            { q: "GODFATHER 2 WON FOR BEST PICTURE IN 1974?", a: "t" },
+
+            { q: "FRITZ LANG'S 'M' WAS THE FIRST BEST PICTURE WINNER", a: "f" },
+
+            { q: "DID GEORGE WASHINGTON DIE IN THE 1700'S?", a: "t" },
+
+            { q: "FRANKLIN DELANO ROOSEVELT WAS ELECTED PRESIDENT 3 TIMES?", a: "f" },
+
+            { q: "ALAN TURING'S CAUSE OF DEATH WAS SUICIDE?", a: "t" }];
+
+
+        var score = 0;
+        // Variable to hold the index of current question.
+        var questionIndex = 0;
+        var questionContainer = document.querySelector("#question");
+        var scoreContainer = document.querySelector("#score");
+        var notificationContainer = document.querySelector("#notification");
+
+        function renderQuestion() {
+            // If there are still more questions, render the next one.
+            if (questionIndex < questions.length) {
+                questionContainer.innerHTML = questions[questionIndex].q;
+            }
+            // If there aren't, render the end game screen.
+            else {
+                questionContainer.innerHTML = "Game Over!";
+                scoreContainer.innerHTML = "Final Score: " + score + " out of " + questions.length;
+            }
+        }
+
+        // Function that updates the score...
+        function updateScore() {
+            scoreContainer.innerHTML = "Score: " + score;
+        }
+        // MAIN PROCESS
+        // ==============================================================================
+
+        // Calling functions to start the game.
+        renderQuestion();
+        updateScore();
+
+        // When the user presses a key, it will run the following function...
+        document.onkeyup = function (event) {
+
+            // If there are no more questions, stop the function.
+            if (questionIndex === questions.length) {
+                return;
+            }
+
+            // Determine which key was pressed, make it lowercase, and set it to the userInput variable.
+            var userInput = event.key.toLowerCase();
+
+            // Only run this code if "t" or "f" were pressed.
+            if (userInput === "t" || userInput === "f") {
+
+                // If they guess the correct answer, increase and update score, alert them they got it right.
+                if (userInput === questions[questionIndex].a) {
+                    notificationContainer.innerHTML = "Correct!";
+                    score++;
+                    updateScore();
+                }
+                // If wrong, alert them they are wrong.
+                else {
+                    notificationContainer.innerHTML = "Wrong!";
+                }
+
+                // Increment the questionIndex variable and call the renderQuestion function.
+                questionIndex++;
+                renderQuestion();
+
+            }
+
+        };
+
+
+
+    </script>>
+</body>
+
+</html>
