@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Important Snippets</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+
+<body>
+    <!-- <button onclick="psychicFunction()">Computer Letter:</button><span></span>  -->
+    <button onclick="myFunky()"> Computer Letter: </button><span id="comLetter"></span>
+    <hr>
+
+    <p><strong>Your guesses so far:</strong><span id="guessCount"></span></p>
+
+    <hr>
+
+    <button onclick="myFunction()"> Try it </button><span class="example"></span>
+
+    <hr>
+
+
+
+    <script>
+
+        document.addEventListener('keyup', logKey);
+        const log = document.getElementById('guessCount');
+        function logKey(e) {
+
+            log.textContent += `${e.key}`;
+        }
+        var comChoice = Math.floor(Math.random() * 25 + 1);
+        var Letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', ' k', 'l', 'm', ' n', ' o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+        function psychicFunction(comChoice, Letters) {
+            var comChoice = Math.floor(Math.random() * 25 + 1);
+            return (Letters[comChoice]);
+        }
+        var computerLetter = (Letters[comChoice]);
+        // document.querySelector('#comLetter').innerHTML = computerLetter;
+
+        function myFunky() {
+            document.querySelector("#comLetter").innerHTML = computerLetter;
+        }
+
+        function myFunction() {
+            document.querySelector(".example").innerHTML = "Hello World";
+        }
+        function myFunky() {
+            document.querySelector("#comLetter").innerHTML = computerLetter;
+        }
+
+
+    </script>
+
+
+</body>
+
+</html>
