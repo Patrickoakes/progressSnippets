@@ -24,7 +24,7 @@
 var outside = function () {
 
 //  1. What will be console logged out? What is *this* in this case?
-console.log(1 + 2);  // answer is 3 ......
+//console.log(1 + 2);  // answer is 3 ......
 console.log(this);  //  answer is window
 
 };
@@ -40,6 +40,7 @@ outside();
     $("#button").on("click", function () {
 
       //  2. What will be console logged out? What is *this* in this case?
+      //$("#button").text(this);
       console.log(this);
       //  Answer: It will console log the button
     });
@@ -53,7 +54,7 @@ outside();
       fullName: function () {
 
         // 3. Put something inside of here so that this works
-        console.log(this.firstName + " " + this.lastName);
+        console.log(this.firstName + "'s last name is " + this.lastName);
       }
     };
 
