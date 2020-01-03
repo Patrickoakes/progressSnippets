@@ -1,0 +1,16 @@
+.crystalImg {
+	position: relative;
+	width: 150px;
+    height: 150px;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: block;
+    margin: 6px;
+    float: left;
+}
+
+h3 {
+	color: #4aaaa5;
+	
+}
