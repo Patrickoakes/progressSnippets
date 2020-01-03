@@ -18,16 +18,24 @@
 
   <!-- Script -->
   <script type="text/javascript">
+//////////////////////////////////////////////////////////////////////
+// THIS IS HEART OF ANONYMOUS FUNCTION////   THE VAR ...... = function () {           needs the call back of  outside(); to return answer
+   
+var outside = function () {
 
-    var outside = function () {
+//  1. What will be console logged out? What is *this* in this case?
+console.log(1 + 2);  // answer is 3 ......
+console.log(this);  //  answer is window
 
-      //  1. What will be console logged out? What is *this* in this case?
-      console.log(this);
+};
 
-    };
+//  Answer: It will console log the window.
+outside();
 
-    //  Answer: It will console log the window.
-    outside();
+
+
+
+////////////////////////////////////////////////////////////////////////////////
 
     $("#button").on("click", function () {
 
