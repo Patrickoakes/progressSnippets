@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Favorite Movies</title>
+  <!----STEP 2 BELOW     ------            -->
+  <style type="text/css">
+    button,
+    div,
+    form,
+    input {
+      margin: 10px;
+    }
+
+    /* */
+  </style>
+  <!---below is commented out for STEP 2 FOR NOW       -->
+  <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css"/> --->
+</head>
+
+<body>
+
+  <div class="container">
+    <h1>Movie Search</h1>
+
+    <!-- ADDED FOR STEP 2!!!!!!!! -->
+    <div id="buttons-view"></div>
+
+    <form id="movie-form">
+      <label for="movie-input">Add a Movie, Yo!</label>
+      <input type="text" id="movie-input">
+      <br>
+      <!-- NEW BUTTON FOR STEP 2 -->
+      <input id="add-movie" type="submit" value="Add a Movie, Yo!">
+    </form>
+    <!--below is commented out for STEP 2 FOR NOW  /never reused here/ This button will trigger our AJAX call <input id="find-movie" type="submit" value="Movie Sear--->
+    <!--  below is commented out for STEP 2 FOR NOW // READDED FOR STEP 4-->
+    <div id="movie-view"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+      // Initial array of movies-----ALL BELOW IS ADDED FOR STEP 2 BUTTON UNTIL START STEP 4 WARNING
+      var movies = ["The Matrix", "The Notebook", "Mr. Nobody", "The Lion King"];
+
+      // ADDED FOR STEP 3/  THEN CHANGED TO displayMoveInfo() {  for STEP 4//////////////
+      /*function alertMovieName() {*/
+      function displayMovieInfo() {
+        //VAR CHANGED FROM "movieName"  to "movie" for STEP 4
+        var movie = $(this).attr("data-name");
+        /*READDED THIS KEY FROM STEP RAW*/
+        var queryURL = "https://www.omdbapi.com/?t=" + movie + "&apikey=trilogy";
+        /* TOOK THIS BACK OUT FROM STEP 3/// alert(movieName);
+    } */   /* STEP 1 /////   below is commented out for STEP 2 AND ADDED IN AGAIN FOR STEP 4 */
+        $.ajax({
+          url: queryURL,
+          method: "GET"
+        }).then(function (response) {
+          // TAKEN OUT FOR FINAL STEP HERE// $("#movie-view").text(JSON.stringify(response));
+          //});
+          /*ADDED FINAL STEP*/
+          var movieDiv = $("<div class='movie'>");
+
+          //CREATED FOR FINAL STEP
+          var rating = response.Rated;
+
+          //CREATED FOR FINAL STEP
+          var pOne = $("<p>").text("Rating: " + rating);
+
+          //CREATED FOR FINAL STEP
+          movieDiv.append(pOne);
+
+          //CREATED FOR FINAL STEP
+          var released = response.Released;
+
+          //CREATED FOR FINAL STEP
+          var pTwo = $("<p>").text("Released: " + released);
+
+          //CREATED FOR FINAL STEP
+          movieDiv.append(pTwo);
+
+          //CREATED FOR FINAL STEP
+          var plot = response.Plot;
+
+          //CREATED FOR FINAL STEP
+          var pThree = $("<p>").text("Plot: " + plot);
+
+          ///CREATED FOR FINAL STEP
+          movieDiv.append(pThree);
+
+          ///CREATED FOR FINAL STEP
+          var imgURL = response.Poster;
+
+          ///CREATED FOR FINAL STEP
+          var image = $("<img>").attr("src", imgURL);
+
+          //CREATED FOR FINAL STEP
+          movieDiv.append(image);
+
+          //CREATED FOR FINAL STEP
+          $("#movies-view").prepend(movieDiv);
+        });
+
+      }
+
+      ///RETURNS HERE FROM LINE 56 TO MAKE ROOM FOR VARIABLES AND APPENDS AND PREPENDS WOW
+      function renderButtons() {
+
+        // Deleting the movie buttons prior to adding new movie buttons
+        // (this is necessary otherwise we will have repeat buttons)
+        $("#buttons-view").empty();
+
+        // Looping through the array of movies
+        for (var i = 0; i < movies.length; i++) {
+
+          // Then dynamicaly generating buttons for each movie in the array.
+          // This code $("<button>") is all jQuery needs to create the start and end tag. (<button></button>)
+          var a = $("<button>");
+          // CHANGED FOR FINAL STEP????????CAREFUL
+          a.addClass("movie-btn");
+          // Adding a data-attribute with a value of the movie at index i
+          a.attr("data-name", movies[i]);
+          // Providing the button's text with a value of the movie at index i
+          a.text(movies[i]);
+          // Adding the button to the HTML
+          $("#buttons-view").append(a);
+        }
+      }
+
+      // This function handles events where one button is clicked
+      $("#add-movie").on("click", function (event) {
+        // event.preventDefault() prevents the form from trying to submit itself.
+        // We're using a form so that the user can hit enter instead of clicking the button if they want
+        event.preventDefault();
+        // This line will grab the text from the input box
+        var movie = $("#movie-input").val().trim();
+        // The movie from the textbox is then added to our array
+        movies.push(movie);
+        /*console.log ADDED FOR STEP 4console.log(movies); taken OUR FOR FINAL         */
+        // calling renderButtons which handles the processing of our movie array
+        renderButtons();
+      });
+      ///////???????  ".movie-btn"  AFFECTS THIS NOW!!!!!!!!!   final STEP
+      // ANOTHER SMALL ADDITION FOR STEP 3///aken OUT FOR STEP 4// REPLACED WITH  displayMovieInfo//alertMovieName);
+      // We're adding a click event listener to all elements with the class "movie"
+      // We're adding the event listener to the document because it will work for dynamically generated elements
+      // $(".movies").on("click") will only add listeners to elements that are on the page at that time
+      $(document).on("click", ".movie-btn", displayMovieInfo);// taken OUT FOR STEP 4// REPLACED WITH  displayMovieInfo//alertMovieName);
+
+      // Calling the renderButtons function at least once to display the initial list of movies
+      renderButtons();
+    </script>
+  </div>
+</body>
+
+</html>
+
+
+<!--///////////////////////STEP 4 WARNING///////////////////////////
+
+// This .on("click") function will trigger the AJAX Call below is commented out for STEP 2 FOR NOW
+//$("#find-movie").on("click", function (event) {
+
+
+
+// Preventing the submit button from trying to submit the form
+// We're optionally using a form so the user may hit Enter to search instead of clicking the button
+// commented out for STEP 2 FOR NOW// event.preventDefault();
+
+// Here we grab the text from the input box
+// commented out for STEP 2 FOR NOW// var movie = $("#movie-input").val();
+
+// Here we construct our URL
+// commented out for STEP 2 FOR NOW//var queryURL = "https://www.omdbapi.com/?t=" + movie + "&apikey=trilogy";
+
+// Write code between the dashes below to hit the queryURL with $ajax, then take the response data
+// and display it in the div with an id of movie-view
+
+// YOUR CODE GOES IN THESE DASHES. DO NOT MANUALLY EDIT THE HTML ABOVE
+// ADD THE SNIPPET AND WATCH THE CHANGE BELOW ////////
+// =================================================================
+/* STEP 1 ///// below is commented out for STEP 2 FOR NOW
+$.ajax({
+url: queryURL,
+method: "GET"
+}).then(function (response) {
+$("#movie-view").text(JSON.stringify(response));
+}); */
+
+// =================================================================
+// commented out for STEP 2 FOR NOW// });  -->

@@ -25,7 +25,7 @@
     <form id="movie-form">
       <label for="movie-input">Add a Movie, Yo!</label>
       <input type="text" id="movie-input"><br>
-
+      <!-- ADDED <br>--> <br>
       <!-- Button triggers new movie to be added -->
       <input id="add-movie" type="submit" value="Add a Movie, Yo!">
     </form>
@@ -47,7 +47,7 @@
         $.ajax({
           url: queryURL,
           method: "GET"
-        }).then(function(response) {
+        }).then(function (response) {
           $("#movies-view").text(JSON.stringify(response));
         });
       }
@@ -77,7 +77,7 @@
       }
 
       // This function handles events where one button is clicked
-      $("#add-movie").on("click", function(event) {
+      $("#add-movie").on("click", function (event) {
         event.preventDefault();
 
         // This line grabs the input from the textbox
