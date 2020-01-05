@@ -12,6 +12,8 @@
     input {
       margin: 10px;
     }
+
+    /* */
   </style>
   <!---below is commented out for STEP 2 FOR NOW       -->
   <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css"/> --->
@@ -42,8 +44,15 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
-      // Initial array of movies-----ALL BELOW IS ADDED FOR STEP 2 BUTTON UNTIL START STEP 3 WARNING
+      // Initial array of movies-----ALL BELOW IS ADDED FOR STEP 2 BUTTON UNTIL START STEP 4 WARNING
       var movies = ["The Matrix", "The Notebook", "Mr. Nobody", "The Lion King"];
+
+      // ADDED FOR STEP 3//////////////
+      function alertMovieName() {
+        var movieName = $(this).attr("data-name");
+
+        alert(movieName);
+      }
 
       // Function for displaying movie data
       function renderButtons() {
@@ -74,7 +83,6 @@
         // event.preventDefault() prevents the form from trying to submit itself.
         // We're using a form so that the user can hit enter instead of clicking the button if they want
         event.preventDefault();
-
         // This line will grab the text from the input box
         var movie = $("#movie-input").val().trim();
         // The movie from the textbox is then added to our array
@@ -84,10 +92,17 @@
         renderButtons();
       });
 
+
+      // ANOTHER SMALL ADDITION FOR STEP 3///
+      // We're adding a click event listener to all elements with the class "movie"
+      // We're adding the event listener to the document because it will work for dynamically generated elements
+      // $(".movies").on("click") will only add listeners to elements that are on the page at that time
+      $(document).on("click", ".movie", alertMovieName);
+
       // Calling the renderButtons function at least once to display the initial list of movies
       renderButtons();
 
-///////////////////START STEP 3///////////////////////////
+////////////////////////STEP 4 WARNING///////////////////////////
 
       // This .on("click") function will trigger the AJAX Call  below is commented out for STEP 2 FOR NOW 
        //$("#find-movie").on("click", function (event) {
