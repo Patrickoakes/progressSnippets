@@ -36,8 +36,10 @@
     // Repeat the above logic to add rows for two more movies of your choice
 
 
-    // BONUS: Once complete, try to make your code as DRY as possible through the use of functions
-    var requestMovie = (movie) => {
+    //THREE DIFFERENT CODE THAT WORK SAME IN FUNCTIONS????WOW WOW WOW
+         /*1st*/                 function requestMovie(movie) {
+      //  2nd                     //  var requestMovie = function (movie) {
+      //   3rd   WITH ARROW        //var requestMovie = (movie) => {
       queryURL = "https://www.omdbapi.com/?t=" + movie + "&apikey=trilogy";
       $.ajax({
         url: queryURL,
